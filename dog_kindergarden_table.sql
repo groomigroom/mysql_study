@@ -1,0 +1,8 @@
+CREATE TABLE dog_kin
+(
+  id INTEGER NOT NULL PRIMARY KEY,
+  dog_name VARCHAR(50) NOT NULL,
+  dog_fav VARCHAR(50) NULL,
+  like_color VARCHAR(50) NULL,
+  dog_age INTEGER NOT NULL
+);
