@@ -1,0 +1,156 @@
+lsnrctl status cmd에
+
+001
+1 차이
+
+
+
+32쪽 
+
+CREATE TABLE 서비스(
+ 서비스번호 VARCHAR2 (10)PRIMARY KEY,
+ 서비스명   VARCHAR2 (100) NULL, 
+ 개시일자   DATE NOT NULL
+ );
+ 
+
+desc 서비스;
+insert into 서비스 values('999','','2015-11-11');
+select * from 서비스;
+
+
+39쪽
+14번
+select deptno, count(*) cnt
+from emp
+group by cnt -->를 오라클에서는 불가능
+
+
+40쪽 16번
+SELECT TO_CHAR(TO_DATE('2023.01.10 10','YYYY.MM.DD HH24')+ 1/24/(60/10),'YYYY.MM.DD HH24:MI:SS') FROM DUAL;
+
++1 -> 24시간 추가
++1/24 -> 1시간 추가
++1/24/60 -> 1분 추가
++1/24/60/60 -> 1초 추가
+
+
+oracle에서 nvl은 mysql의 ifnull과 같다.
+
+
+mysql
+
+use groomi;
+DROP TABLE IF EXISTS ad_post;
+DROP TABLE IF EXISTS ad;
+DROP TABLE IF EXISTS media;
+
+CREATE TABLE ad (
+ad_id   INT PRIMARY KEY,
+ad_name VARCHAR(50) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE media (
+media_id   INT PRIMARY KEY,
+media_name VARCHAR(50) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE ad_post (
+post_id     INT PRIMARY KEY,
+ad_id       INT NOT NULL,
+media_id    INT NOT NULL,
+start_dt    DATETIME NOT NULL,
+end_dt      DATETIME NULL,
+CONSTRAINT fk_post_ad    FOREIGN KEY (ad_id)    REFERENCES ad(ad_id),
+CONSTRAINT fk_post_media FOREIGN KEY (media_id) REFERENCES media(media_id)
+) ENGINE=InnoDB;
+
+-- 2) 샘플 데이터 (게시 10건)
+INSERT INTO ad(ad_id, ad_name) VALUES
+(1,'봄세일'),
+(2,'여름이벤트'),
+(3,'가을프로모션'),
+(4,'겨울특가');
+
+INSERT INTO media(media_id, media_name) VALUES
+(10,'네이버'),
+(20,'카카오'),
+(30,'유튜브');
+
+INSERT INTO ad_post(post_id, ad_id, media_id, start_dt, end_dt) VALUES
+( 1, 1, 10, '2023-01-05 00:00:00', '2023-01-31 23:59:59'),
+( 2, 2, 10, '2023-01-01 00:00:00', '2023-01-20 23:59:59'), -- 네이버 최초
+( 3, 3, 10, '2023-02-01 00:00:00', '2023-02-28 23:59:59'),
+( 4, 4, 10, '2023-01-10 00:00:00', '2023-01-25 23:59:59'),
+
+( 5, 1, 20, '2023-01-10 00:00:00', '2023-01-31 23:59:59'),
+( 6, 2, 20, '2023-01-03 00:00:00', '2023-01-25 23:59:59'), -- 카카오 최초
+( 7, 4, 20, '2023-02-01 00:00:00', '2023-02-28 23:59:59'),
+
+( 8, 3, 30, '2023-01-15 00:00:00', '2023-01-31 23:59:59'),
+( 9, 4, 30, '2023-01-02 00:00:00', '2023-01-20 23:59:59'), -- 유튜브 최초
+(10, 2, 30, '2023-01-20 00:00:00', '2023-02-05 23:59:59');
+
+-- 3) "매체ID별 최초 게시 광고" + "광고시작일자" 조회 (문제 25번 형태와 동일한 로직)
+SELECT
+m.media_name,
+a.ad_name,
+p.start_dt
+FROM ad_post p
+JOIN ad a ON p.ad_id = a.ad_id
+JOIN media m ON p.media_id = m.media_id
+JOIN (
+SELECT media_id, MIN(start_dt) AS start_dt
+FROM ad_post
+GROUP BY media_id
+) d
+ON p.media_id = d.media_id
+AND p.start_dt = d.start_dt
+ORDER BY m.media_name;
+-- (참고) 동률(같은 매체에서 start_dt가 같은 게시가 여러 개)일 때 1개만 고르려면:
+-- MySQL 8 윈도우 함수 버전
+-- SELECT media_name, ad_name, start_dt
+-- FROM (
+-- SELECT m.media_name, a.ad_name, p.start_dt,
+-- ROW_NUMBER() OVER (PARTITION BY p.media_id ORDER BY p.start_dt, p.post_id) AS rn
+-- FROM ad_post p
+-- JOIN ad a ON p.ad_id = a.ad_id
+-- JOIN media m ON p.media_id = m.media_id
+-- ) x
+-- WHERE rn = 1
+-- ORDER BY media_name;
+
+----------------
+
+sum(col_a + col_c) != sum(col_a) + sum(col_c)
+인 이유는 col_a나 col_c가 null이면 그냥 null값이 포함되기 때문에.
+
+
+---------------------------
+
+
+mysql 28번 49쪽
+
+CREATE TABLE TBL (
+    ID INT
+);
+
+
+INSERT INTO TBL (ID)VALUES
+(100),
+(100),
+(200),
+(200),
+(200),
+(999),
+(999);
+
+SELECT ID
+FROM TBL
+GROUP BY ID
+HAVING COUNT(*)=2
+ORDER BY (CASE WHEN ID=999 THEN 0 ELSE ID END);
+
+---------------------------
+
+
