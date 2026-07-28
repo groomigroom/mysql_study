@@ -8,6 +8,7 @@ create table TBL
 (ID integer);
 
 insert into TBL
+values
 (100),
 (100),
 (200),
