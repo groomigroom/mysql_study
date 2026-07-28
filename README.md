@@ -3,6 +3,19 @@ mysql 공부 파일입니다.
 # mysql
 mysql 공부 파일입니다.
 
+
+create table TBL
+(ID integer);
+
+insert into TBL
+(100),
+(100),
+(200),
+(200),
+(200),
+(999),
+(999);
+
 네, GitHub를 이용해 MySQL 코드를 작성·관리하는 것은 가능합니다.
 다만 중요한 점은 GitHub 자체가 데이터베이스 실행 환경은 아니라는 것입니다. 정리하면 다음과 같습니다:
 
