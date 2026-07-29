@@ -22,6 +22,24 @@ values
 (3000, 'C3000', 200),
 (4000, 'D3000', 300);
 
+create table 고객 (
+  고객번호 integer primary key,
+  고객명 varchar(50),
+  단말기ID integer
+);
+
+insert into 고객
+values
+(11000, '홍길동', 1000),
+(12000, '강감찬', null),
+(13000, '이순신', null),
+(14000, '안중근', 3000),
+(15000, '고길동', 4000),
+(16000, '이대로', 4000);
+
+select *
+from 고객;
+
 
 mmmmmmmmmmmmmmmjhhhhffuuuccvnnnnnkkkk
 
