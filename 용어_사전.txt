@@ -84,6 +84,22 @@ c start
 
 ---------------------
 
+case when then
+MySQL의 CASE WHEN THEN 문은 조건에 따라 다른 값을 반환하는 조건문입니다.
+기본 구조는 CASE WHEN [조건] THEN [결과] ELSE [기본값] END입니다.
+기본 문법 구조sql
+CASE 
+    WHEN 조건1 THEN 결과1
+    WHEN 조건2 THEN 결과2
+    ELSE 모든 조건이 아닐 때 결과
+END
+주요 특징
+순서대로 실행: 위에서부터 조건을 만족하는지 확인하고 첫 번째 참인 결과만 반환합니다.
+ELSE 생략 가능: ELSE를 쓰지 않고 조건을 만족하지 못하면 NULL을 반환합니다.
+END 필수: 구문의 마지막은 항상 END로 끝내야 합니다.
+
+---------------------------------------------------------------
+
 coalesce
 MySQL과 Oracle에서 COALESCE 함수는 전달된 여러 개의 값(인자) 중에서 NULL이 아닌 첫 번째 값을 반환하는 표준 SQL 함수입니다.
 두 데이터베이스 모두 동작 방식이 동일합니다.
@@ -223,15 +239,7 @@ z start
 
 
 
-
-mysql case when then 문법1    +4                    MySQL의 CASE WHEN THEN 문은 조건에 따라 다른 값을 반환하는 조건문입니다. 기본 구조는 CASE WHEN [조건] THEN [결과] ELSE [기본값] END입니다.기본 문법 구조sqlCASE 
-    WHEN 조건1 THEN 결과1
-    WHEN 조건2 THEN 결과2
-    ELSE 모든 조건이 아닐 때 결과
-END
-코드를 사용할 때는 주의가 필요합니다.주요 특징순서대로 실행: 위에서부터 조건을 만족하는지 확인하고 첫 번째 참인 결과만 반환합니다.ELSE 생략 가능: ELSE를 쓰지 않고 조건을 만족하지 못하면 NULL을 반환합니다.END 필수: 구문의 마지막은 항상 END로 끝내야 합니다.더 구체적인 예제 쿼리가 필요하거나, 특정 테이블 데이터를 변환하는 방법을 알고 싶으시면 말씀해 주세요.티스토리[MySQL] CASE 기본개념, 예제로 쉽게 이해하기2022. 8. 18. — 1) WHEN - THEN은 항상 같이 사용하기 · 2) WHEN - THEN 개수 상관 없음 · 3) ELSE가 없고, WHEN - THEN 조건 충족하지 않으...티스토리MySQL / MariaDB case. when. then. 단일/다중 조건문.2022. 1. 19. — MySQL / MariaDB case. when. then. 다중조건문 사용하기. select case when 조건1 then 반환값 when 조건2 then ...티스토리[MySql] CASE WHEN ~ THEN ~ELSE END 문법 - Today Yewon Learned2023. 5. 22. — CASE 문법 - 프로그래밍에서의 IF문이나 Switch문처럼 쿼리에서 사용할 수 있는 문법. CASE WHEN 조건1 THEN 결과값1 WHEN 조건2 THEN...티스토리[SQL] MySQL CASE문 기본 사용법 & 중첩 CASE문 - 기록하는 노트2024. 8. 8. — CASE문조건에 따라 다른 결과를 반환해야 할 때 유용하게 사용된다.CASE WHEN condition1 THEN result1 WHEN condition2 TH...티스토리[Mysql] 조건문 CASE~ WHEN~ THEN~ 알아보기 - 애기 개발자 - 티스토리2023. 9. 15. — case, when, then, else, end. 이 5가지 순서로 기억하면 된다. CASE WHEN THEN '조건1 반환 값' WHEN THEN '조건2 반...CoddyCASE WHEN 구문 – SQL치트 시트 조건은 위에서 아래로 확인됩니다. 첫 번째로 일치하는 조건이 적용됩니다. ELSE 는 선택 사항입니다. ELSE 가 없으면 일치하지 않는 행은 NULL...    AI 답변에 오류가 있을 수 있습니다. 자세히 알아보기
-
-ㅡㅡㅡㅡㅡㅡㅡ
+---------------------------------------------------------------
 
 MySQL에서 REPLACE는 문자열을 바꾸는 함수와 데이터를 넣거나 덮어쓰는 명령어 두 가지 의미로 쓰입니다. 상황에 따라 문자열 치환 함수(REPLACE) 또는 데이터 갱신/삽입 명령어(REPLACE INTO)로 동작합니다.문자열 바꾸기 함수 (REPLACE)텍스트 안에서 특정 글자를 찾아 다른 글자로 바꿉니다.기본 문법: REPLACE(문자열, 찾을문자, 바꿀문자)동작 방식: 지정한 문자열에 찾는 글자가 있으면 전부 새로운 글로 바꿉니다.예시: REPLACE('A-B-C', '-', '') 결과는 'ABC'가 됩니다.데이터 넣고 덮어쓰기 명령어 (REPLACE INTO)테이블에 데이터를 저장할 때 중복되는 키가 있으면 기존 데이터를 지우고 새 데이터로 바꿉니다.기본 문법: REPLACE INTO 테이블명 (컬럼) VALUES (값)동작 방식:기본키(Primary Key)나 고유키(Unique Key) 중복이 없으면 새로 넣습니다 (INSERT).중복이 있으면 기존 데이터를 지우고 새 걸로 바꿉니다 (DELETE 후 INSERT).
 
