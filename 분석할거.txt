@@ -9,6 +9,18 @@ values
 (200, 'IOS'),
 (300, 'Bada');
 
+create table 단말기 (
+  단말기ID integer primary key,
+  단말기명 varchar(50),
+  OSID integer
+);
+
+insert into 단말기
+values
+(1000, 'A1000', 100),
+(2000, 'B2000', 100),
+(3000, 'C3000', 200),
+(4000, 'D3000', 300);
 
 
 mmmmmmmmmmmmmmmjhhhhffuuuccvnnnnnkkkk
