@@ -37,8 +37,13 @@ values
 (15000, '고길동', 4000),
 (16000, '이대로', 4000);
 
-select *
-from 고객;
+select A.고객번호, A.고객명, B.단말기ID, B.단말기명, C.OSID,
+C.OS명
+from 고객 A left outer join 단말기 B
+on (A.고객번호 in(11000, 12000) and A.단말기ID = B.단말기ID)
+left outer join os C
+on (B.OSID = C.OSID)
+order by A.고객번호;
 
 
 mmmmmmmmmmmmmmmjhhhhffuuuccvnnnnnkkkk
