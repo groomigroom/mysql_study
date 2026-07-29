@@ -3,6 +3,14 @@ create table os (
   OS명 varchar(50)
 );
 
+insert into os
+values
+(100, 'Android'),
+(200, 'IOS'),
+(300, 'Bada');
+
+
+
 mmmmmmmmmmmmmmmjhhhhffuuuccvnnnnnkkkk
 
 
