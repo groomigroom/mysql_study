@@ -1,3 +1,9 @@
+create table os (
+  OSID integer primary key,
+  OS명 varchar(50)
+);
+
+mmmmmmmmmmmmmmmjhhhhffuuuccvnnnnnkkkk
 
 
 exists와 not exists
