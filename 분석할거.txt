@@ -2,7 +2,13 @@
 
 create user 'developer'@'*' identified by 'P!ssw0rd';
 
+-------------------
 
+grant select, update, delete, insert
+on board.*
+to 'developer'@'*';
+
+-------------------
 
 
 
