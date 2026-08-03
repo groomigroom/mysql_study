@@ -35,6 +35,16 @@ create table 게시판 (
 	사용여부 boolean
 );
 
+create table 게시글 (
+	게시글ID varchar(50) primary key,
+	게시판ID varchar(50),
+	제목 varchar(50),
+	내용 varchar(50),
+	등록일시 date,
+	등록자명 varchar(50),
+	삭제여부 boolean
+);
+
 -------------------------------------------------------------------------
 
 
