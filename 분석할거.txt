@@ -14,6 +14,12 @@ from 광고게시 D
 where D.광고매체ID = C.광고매체ID
 group by D.광고매체ID;
 
+select 광고매체ID, min(광고시작일자) as 광고시작일자
+from 광고게시
+group by 광고매체ID;
+
+select min(광고매체ID) as 광고매체ID, min(광고시작일자) as 광고시작일자
+
 
 ------------------------------
 
