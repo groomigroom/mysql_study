@@ -1,3 +1,16 @@
+52번 문제
+
+select COL1, sum(COL2)
+from T1	
+group by COL1
+union all
+select null, sum(COL2)
+from T1
+order by 1 asc;
+
+
+-------------------------------------------------------------------------
+
 백엔드용
 
 create user 'developer'@'*' identified by 'P!ssw0rd';
