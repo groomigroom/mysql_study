@@ -1,3 +1,16 @@
+25번
+
+select C.광고매체명, B.광고명, A.광고시작일자
+from 광고게시 A, 광고 B, 광고매체 C,
+( ㄱ ) D
+where A.광고시작일자 = D.광고시작일자
+and A.광고매체ID = D.광고매체ID
+and A.광고ID = B.광고ID
+and A.광고매체ID = C.광고매체ID
+order by C.광고매체명;
+
+------------------------------
+
 52번 문제
 
 select COL1, sum(COL2)
