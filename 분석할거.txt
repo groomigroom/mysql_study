@@ -46,6 +46,12 @@ create table 게시글 (
 );
 
 select A.게시판ID, A.게시판명, count(B.게시글ID) as CNT
+from 게시판 A, 게시글 B
+where A.게시판ID = B.게시판ID(+)
+and B.삭제여부(+) = 'N'
+and A.사용여부 = 'Y'
+group by A.게시판ID, A.게시판명
+order by A.게시판ID;
 
 -------------------------------------------------------------------------
 
