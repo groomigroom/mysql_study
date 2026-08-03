@@ -29,6 +29,10 @@ board_number integer not null auto_increment
 
 -------------------
 
+favorite_count INT NOT NULL DEFAULT 0
+
+-------------------
+
 
 
 --------------------------------------------------------------------
