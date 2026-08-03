@@ -8,6 +8,11 @@ select null, sum(COL2)
 from T1
 order by 1 asc;
 
+select COL1, sum(COL2)
+from T1
+group by grouping sets (COL1)
+order by 1 asc;
+
 
 -------------------------------------------------------------------------
 
