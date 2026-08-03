@@ -9,6 +9,12 @@ and A.광고ID = B.광고ID
 and A.광고매체ID = C.광고매체ID
 order by C.광고매체명;
 
+select D.광고매체ID, min(D.광고시작일자) as 광고시작일자
+from 광고게시 D
+where D.광고매체ID = C.광고매체ID
+group by D.광고매체ID;
+
+
 ------------------------------
 
 52번 문제
