@@ -1,32 +1,4 @@
-25번xxxxx
 
-select C.광고매체명, B.광고명, A.광고시작일자
-from 광고게시 A, 광고 B, 광고매체 C,
-( ㄱ ) D
-where A.광고시작일자 = D.광고시작일자
-and A.광고매체ID = D.광고매체ID
-and A.광고ID = B.광고ID
-and A.광고매체ID = C.광고매체ID
-order by C.광고매체명;
-
-select D.광고매체ID, min(D.광고시작일자) as 광고시작일자
-from 광고게시 D
-where D.광고매체ID = C.광고매체ID
-group by D.광고매체ID;
-
-select 광고매체ID, min(광고시작일자) as 광고시작일자
-from 광고게시
-group by 광고매체ID;
-
-select min(광고매체ID) as 광고매체ID, min(광고시작일자) as 광고시작일자
-from 광고게시
-group by 광고ID;
-
-select min(광고매체ID) as 광고매체ID, min(광고시작일자) as 광고시작일자
-from 광고게시
-
-
-------------------------------
 
 52번 문제
 
