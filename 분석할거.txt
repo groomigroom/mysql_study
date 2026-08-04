@@ -6,7 +6,8 @@ group by와 달리
 over 키워드와 함께 사용.
 
 순의 함수
-
+row_number() 
+무시(중복없이 연속 번호 부여)
 
 
 GROUP BY GROUPING SETS (col1)은 일반적인 GROUP BY col1과 완전히 동일한 결과를 반환합니다. 단 하나의 컬럼만으로 구성된 그룹 집합을 정의했기 때문입니다.
