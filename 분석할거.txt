@@ -1,6 +1,6 @@
 
 
-52번 문제
+52번 문제 문법만 정리하기
 
 select COL1, sum(COL2)
 from T1	
