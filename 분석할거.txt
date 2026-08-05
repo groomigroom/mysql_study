@@ -1,3 +1,6 @@
+html에 넣기
+top() with ties
+
 sql에서 top with ties 사용법
 
 SQL에서 TOP WITH TIES는 지정한 상위 행 개수만큼 출력할 때,
