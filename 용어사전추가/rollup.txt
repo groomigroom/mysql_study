@@ -1,0 +1,36 @@
+오라클에서 rollup()
+
+
+오라클(Oracle)에서 GROUP BY ROLLUP()은 지정된 컬럼의 순서(계층)에 따라 오른쪽에서 왼쪽 순서로 그룹을 하나씩 제거하며 소계(Subtotal)와 총계(Grand Total)를 자동으로 계산해 주는 기능입니다.
+## 1. 작동 원리 (핵심 매커니즘)
+ROLLUP(A, B, C)처럼 컬럼을 지정하면, 오라클은 내부적으로 총 N+1개의 그룹을 만들어 한 번에 UNION ALL로 합친 것과 같은 결과를 냅니다.
+
+* GROUP BY A, B, C (상세 내역)
+* GROUP BY A, B (C의 소계)
+* GROUP BY A (B, C의 소계)
+* GROUP BY () (전체 총계)
+
+## 2. 직관적인 예시와 결과 구조
+부서번호(DEPTNO)와 직급(JOB)별 급여 합계를 구하는 예시입니다.
+
+SELECT DEPTNO, JOB, SUM(SAL)FROM EMPGROUP BY ROLLUP(DEPTNO, JOB);
+
+## 출력 결과의 형태
+결과 테이블은 아래와 같이 위에서 아래로 갈수록 큰 단위의 합계가 출력됩니다.
+소계가 계산된 자리는 빈칸(NULL)으로 표시됩니다.
+
+| DEPTNO (부서) | JOB (직급) | SUM(SAL) (급여합계) | 의미 |
+|---|---|---|---|
+| 10 | CLERK | 1300 | 10번 부서의 CLERK 합계 |
+| 10 | MANAGER | 2450 | 10번 부서의 MANAGER 합계 |
+| 10 | NULL | 3750 | 10번 부서의 소계 (JOB 제거) |
+| 20 | CLERK | 1900 | 20번 부서의 CLERK 합계 |
+| 20 | ANALYST | 3000 | 20번 부서의 ANALYST 합계 |
+| 20 | NULL | 4900 | 20번 부서의 소계 (JOB 제거) |
+| NULL | NULL | 8650 | 모든 부서의 총계 (DEPTNO, JOB 모두 제거) |
+
+## 3. 핵심 주의사항: 컬럼의 순서
+ROLLUP은 순서가 아주 중요합니다. 오른쪽 컬럼부터 순서대로 지워나가기 때문입니다.
+
+* ROLLUP(A, B): A별 소계와 전체 총계가 나옵니다. [1]
+* ROLLUP(B, A): B별 소계와 전체 총계가 나옵니다. [1]
