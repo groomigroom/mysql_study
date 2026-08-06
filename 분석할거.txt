@@ -1,15 +1,4 @@
- by 1 asc;
-
-
-오라클에서 rollup()
-
-
-오라클(Oracle)에서 GROUP BY ROLLUP()은 지정된 컬럼의 순서(계층)에 따라 오른쪽에서 왼쪽 순서로 그룹을 하나씩 제거하며 소계(Subtotal)와 총계(Grand Total)를 자동으로 계산해 주는 기능입니다.
-## 1. 작동 원리 (핵심 매커니즘)
-ROLLUP(A, B, C)처럼 컬럼을 지정하면, 오라클은 내부적으로 총 N+1개의 그룹을 만들어 한 번에 UNION ALL로 합친 것과 같은 결과를 냅니다.
-
-* GROUP BY A, B, C (상세 내역)
-* GROUP BY A, B (C의 소계)
+  BY A, B (C의 소계)
 * GROUP BY A (B, C의 소계)
 * GROUP BY () (전체 총계)
 
