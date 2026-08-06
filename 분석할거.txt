@@ -1,30 +1,4 @@
-
-
-52번 문제 문법만 정리하기
-57번도 이거 참고
-
-select COL1, sum(COL2)
-from T1	
-group by COL1
-union all
-select null, sum(COL2)
-from T1
-order by 1 asc;
-
-select COL1, sum(COL2)
-from T1
-group by grouping sets (COL1)
-order by 1 asc;
-
-select COL1, sum(COL2)
-from T1
-group by rollup (COL1)
-order by 1 asc;
-
-select COL1, sum(COL2)
-from T1
-group by cube (COL1)
-order by 1 asc;
+ by 1 asc;
 
 
 오라클에서 rollup()
