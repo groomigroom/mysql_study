@@ -12,6 +12,8 @@ rollup cube 에이치티엠엘 정리하기 위에꺼도
 round 정리하기
 text 정리하기
 top with ties 정리하기
+trigger
+window 함수 정리하기
 
 
 
