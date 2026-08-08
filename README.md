@@ -8,6 +8,7 @@ siot_menu.html까지 정리함!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 group by grouping set 정리하기
+rollup cube 에이치티엠엘 정리하기 위에꺼도
 
 
 
