@@ -1,0 +1,8 @@
+sql에서 group by grouping sets((a, b), (a), (b), ())의 의미?    +2                    모두 보기GROUP BY GROUPING SETS ((a, b), (a), (b), ())은 하나의 쿼리 안에서 지정한 4가지 서로 다른 기준(그룹화 집합)으로 각각 집계한 결과를 하나로 합쳐서(UNION ALL 한 것처럼) 보여주는 문법입니다.개별 그룹화 세트의 의미(a, b): 열 a와 b를 동시에 기준으로 삼아 그룹화합니다 (GROUP BY a, b와 동일).(a): 열 a만 기준으로 삼아 그룹화합니다 (GROUP BY a와 동일).(b): 열 b만 기준으로 삼아 그룹화합니다 (GROUP BY b와 동일).(): 열을 전혀 그룹화하지 않고 전체 데이터를 대상으로 집계합니다 (전체 총합, GROUP BY 없는 집계와 동일).특징 및 활용결과 합치기: 위 4개의 독립된 GROUP BY 결과를 하나의 결과 집합으로 반환합니다.소계와 총합: a별 소계, b별 소계, (a,b) 조합별 상세 소계, 그리고 전체 총합을 한 번에 조회할 때 유용합니다.NULL 값 발생: 특정 그룹화 기준에 포함되지 않는 열의 값은 결과 밴드에서 NULL로 채워져 출력됩니다.이
+
+
+
+
+
+
+해를 돕기 위해 예제 테이블과 실제 출력되는 결과 화면을 함께 보여드릴까요?티스토리[오라클sql] 그룹함수 | ROLLUP, CUBE, GROUPING ... - 176농장에 오셨군요.2023. 2. 20. — 총 판매한 음료의 합계. 3) GROUPING SETS. GROUPING SETS(A, ()) : A 그룹핑 -> 합계; GROUPING SETS(A, B, ()Snowflake DocumentationGROUP BY GROUPING SETS - Snowflake DocumentationGROUPING SETS((a, b))`는 열 ``a` 및 b 모두를 기준으로 그룹화하는 단일 그룹화 세트를 생성합니다(:code:`GROUP BY a, b`와 ...GitHubROLLUP과 GROUPING SETS 함수 - SK(주) C&C's TECH BLOG2020. 3. 20. — GROUPING SETS 함수는 GROUP BY 절에서 그룹 조건을 여러 개 지정할 수 있는 함수입니다. 이 함수의 결과는 각 그룹 조건에 대해 별도로 GROUP...Microsoft LearnSELECT - GROUP BY 절(Transact-SQL) - Microsoft Learn2026. 7. 20. — 모든 행에서 총합 계만 계산하기 위한 약식입니다. 단독으로 GROUP BY () 사용하거나 내부에서 GROUPING SETS 사용합니다. ALL column-ex...velog[SQLD] #21. 그룹 함수 (Group Functions) - velog2025. 5. 24. — GROUPING SETS 함수는 GROUP BY 절의 확장 기능 중 가장 유연한 방법으로, 사용자가 명시적으로 원하는 그룹핑 조합(grouping sets)만을 ...YouTube·아이리포8m[Everything about SQLD] 21. Group Functions | ROLLUP | CUBE    AI 답변에 오류가 있을 수 있습니다. 자세히 알아보기
