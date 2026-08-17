@@ -1,0 +1,63 @@
+이미지 속 106번 문제의 정답이 ② (2건)인 이유와 사용된 MERGE 문법에 대한 상세한 설명입니다.
+
+───
+
+1. 정답이 2번(2건)인 이유 (풀이 과정)
+이 문제는 T1 테이블에 T2 테이블의 데이터를 합치는 MERGE 문을 수행한 후, 최종적으로 T1 테이블에 남는 행(Row)의 개수를 구하는 문제입니다.
+1단계: ON 조건 비교 (B.EMPNO = A.EMPNO)
+T2(B) 테이블의 각 행을 T1(A) 테이블과 사원번호(EMPNO)로 비교합니다.
+1. EMPNO 7369 (SMITH): T1에 존재함 ➔ MATCHED (일치)EMPNO 7566 (JONES): T1에 존재함 ➔ MATCHED (일치)EMPNO 7788, 7876, 7902: T1에 없음 ➔ NOT MATCHED (불일치)
+
+───
+
+2단계: WHEN MATCHED THEN (일치하는 경우 처리)
+일치하는 7369와 7566 행에 대해 UPDATE 및 DELETE를 적용합니다.
+• 7369 (SMITH)
+◦ JOB이 'CLERK'이므로 UPDATE 조건(WHERE A.JOB = 'CLERK')을 만족합니다.
+◦ SAL 변경: 기존 800 ➔ 800 - 500 = 300으로 업데이트됩니다.
+◦ 그 후 DELETE 조건(WHERE A.SAL < 2000)을 검사합니다. 현재 SAL이 300이므로 2000보다 작아 삭제(DELETE) 대상이 됩니다.
+◦ 결과: T1에서 SMITH 행 삭제됨.
+• 7566 (JONES)
+◦ JOB이 'MANAGER'이므로 UPDATE 조건(WHERE A.JOB = 'CLERK')을 만족하지 못해 SAL은 그대로 2975입니다.
+◦ 그 후 DELETE 조건(WHERE A.SAL < 2000)을 검사합니다. SAL이 2975이므로 삭제되지 않고 남아있습니다.결과: T1에 JONES 행 유지됨 (1건).
+
+───
+
+3단계: WHEN NOT MATCHED THEN (일치하지 않는 경우 처리)
+T1에 없던 T2 테이블의 행들(7788, 7876, 7902) 중 WHERE B.JOB = 'CLERK' 조건을 만족하는 행만 INSERT 됩니다.
+• 7788 (SCOTT, ANALYST) ➔ 조건 불일치 (INSERT 안 됨)
+• 7876 (ADAMS, CLERK) ➔ 조건 일치! T1에 추가됨 (1건)7902 (FORD, ANALYST) ➔ 조건 불일치 (INSERT 안 됨)
+
+───
+
+4단계: 최종 T1 테이블 상태
+• 기존에 살아남은 행: JONES (1건)새로 삽입(INSERT)된 행: ADAMS (1건)최종 총 건수: 2건 (정답 ②)
+
+───
+
+2. 문제에 사용된 SQL 문법 설명
+이 문제의 핵심은 Oracle DB 등에서 주로 쓰이는 MERGE (병합) 문법입니다. 구조별 기능은 다음과 같습니다.
+① MERGE INTO ~ USING
+sql
+MERGE INTO t1 a USING T2 B ON (B.EMPNO = A.EMPNO)
+
+• MERGE INTO t1 a: 데이터를 추가하거나 수정할 타겟 테이블(t1)을 지정하고 별칭을 a로 둡니다.
+• USING T2 B: 타겟 테이블과 비교할 원본 소스 데이터(T2)를 지정하고 별칭을 b로 둡니다.
+• ON (...): 두 테이블의 행들을 어떤 컬럼 기준으로 매칭할지 조건을 지정합니다.
+② WHEN MATCHED THEN (일치 시 작동)
+sql
+WHEN MATCHED THEN UPDATE SET A.SAL = B.SAL - 500 WHERE A.JOB = 'CLERK' DELETE WHERE A.SAL < 2000
+
+• ON 조건에 맞는 동일한 데이터가 타겟 테이블에 이미 존재할 때 실행됩니다.
+• UPDATE: 지정한 조건(WHERE)을 만족하는 행의 데이터를 수정합니다.
+• DELETE: MERGE 문에서의 DELETE는 UPDATE가 완료된 후의 데이터를 기준으로 추가 조건을 검사하여 해당 행을 삭제합니다. (매우 중요: 원래 값 기준이 아니라 변경된 값 기준으로 판단합니다.)
+③ WHEN NOT MATCHED THEN (미일치 시 작동)
+sql
+WHEN NOT MATCHED THEN INSERT (A.EMPNO, A.ENAME, A.JOB) VALUES (B.EMPNO, B.ENAME, B.JOB) WHERE B.JOB = 'CLERK';
+
+• ON 조건에 맞는 데이터가 타겟 테이블에 없을 때 실행됩니다.
+• 새로운 행을 삽입(INSERT)할 수 있으며, 뒤에 WHERE 조건을 붙여 소스 테이블(B)의 데이터 중 특정 조건을 만족하는 데이터만 골라서 넣을 수 있습니다.
+
+───
+
+추가적으로 풀이가 이해되지 않거나 SQL 명령어의 세부 동작에 대해 더 궁금한 점이 있다면 언제든 말씀해 주세요!
