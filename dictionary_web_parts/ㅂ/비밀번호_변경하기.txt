@@ -1,0 +1,40 @@
+MySQL Workbench에서 비밀번호를 바꾸는 방법은 크게 마우스 클릭(UI)으로 바꾸는 방법과 SQL 쿼리문을 실행해서 바꾸는 방법 두 가지가 있습니다. 편한 방법을 선택해 보세요. [1] 
+------------------------------
+## 방법 1: 마우스 클릭으로 변경하기 (가장 간단함)
+
+   1. MySQL Workbench를 실행하고 해당 데이터베이스 인스턴스에 로그인합니다.
+   2. 왼쪽 사이드바의 Navigator 메뉴에서 Management 아래에 있는 [Users and Privileges](https://right-hot.tistory.com/entry/mysql-%EC%9B%8C%ED%81%AC%EB%B0%B4%EC%B9%98%EB%A1%9C-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EB%B3%80%EA%B2%BD)를 클릭합니다.
+   3. 중앙의 User Accounts 목록에서 비밀번호를 바꿀 사용자 아이디(예: root)를 클릭합니다.
+   4. 우측 화면의 Password와 Confirm Password 칸에 새로 사용할 비밀번호를 입력합니다.
+   5. 오른쪽 아래에 있는 Apply 버튼을 누르면 변경이 완료됩니다. [2, 3, 4, 5] 
+
+------------------------------
+## 방법 2: SQL 쿼리문으로 변경하기
+
+   1. Workbench 상단의 새 쿼리 창(New Query Tab)을 엽니다.
+   2. 아래 명령어를 입력합니다. (root, localhost, 새로운비밀번호 부분은 본인 환경에 맞게 수정하세요) [1, 6] 
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY '새로운비밀번호';
+FLUSH PRIVILEGES;
+
+
+   1. 쿼리문을 드래그한 뒤 Ctrl + Shift + Enter (또는 상단의 번개 모양 아이콘)를 눌러 실행합니다. [3] 
+
+------------------------------
+## ⚠️ 중요: 비밀번호 변경 후 필수 작업
+비밀번호를 성공적으로 변경했다면, 기존에 저장된 연결(Connection) 정보도 업데이트해야 합니다. [1] 
+
+   1. Workbench 홈 화면으로 이동합니다.
+   2. 방금 비밀번호를 바꾼 연결 카드에서 마우스 우클릭 후 Edit Connection을 누릅니다.
+   3. Password 항목 옆의 Store in Vault... 버튼을 누르고, 새 비밀번호를 입력한 뒤 저장합니다. [7, 8] 
+
+혹시 현재 기존 비밀번호를 아예 분실해서 Workbench 로그인 자체가 불가능한 상황이신가요? 그렇다면 추가적인 초기화 작업이 필요하므로 말씀해 주세요!
+
+[1] [https://www.youtube.com](https://www.youtube.com/watch?v=MTBJivERLzU)
+[2] [https://www.youtube.com](https://www.youtube.com/watch?v=DZQ_94d1pXM)
+[3] [https://99cone.tistory.com](https://99cone.tistory.com/19)
+[4] [https://www.youtube.com](https://www.youtube.com/watch?v=yc-ozszzZPk&t=1)
+[5] [https://right-hot.tistory.com](https://right-hot.tistory.com/entry/mysql-%EC%9B%8C%ED%81%AC%EB%B0%B4%EC%B9%98%EB%A1%9C-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EB%B3%80%EA%B2%BD)
+[6] [https://calvin08.tistory.com](https://calvin08.tistory.com/7)
+[7] [https://o0oheamao0o.tistory.com](https://o0oheamao0o.tistory.com/97)
+[8] [https://footprints-on-the-snowfield.tistory.com](https://footprints-on-the-snowfield.tistory.com/7)
