@@ -1,3 +1,22 @@
+오라클의 MERGE 문은 두 테이블의 숫자를 서로 더하는 것이 아니라, 조건에 따라 데이터를 삽입(INSERT)하거나 수정(UPDATE)하는 병합 작업 명령어입니다. [1] 
+## MERGE 문의 핵심 동작
+
+* 조건 일치 (WHEN MATCHED): 대상 테이블에 같은 데이터가 있으면 수정(UPDATE)합니다.
+* 조건 불일치 (WHEN NOT MATCHED): 대상 테이블에 데이터가 없으면 새로 삽입(INSERT)합니다. [2] 
+
+숫자 값을 서로 더하고 싶다면 UPDATE 구문 안에서 SET 컬럼 = 컬럼 + 소스컬럼 형태로 직접 더하는 수식을 작성해야 합니다. 단순히 MERGE를 쓴다고 해서 알아서 숫자가 더해지지는 않습니다.
+만약 특정 숫자 컬럼을 서로 더하는 예제 코드가 필요하시면 말씀해 주세요.
+
+[1] [https://salty-computer-until-night.tistory.com](https://salty-computer-until-night.tistory.com/4)
+[2] [https://dreamcoding.tistory.com](https://dreamcoding.tistory.com/94)
+
+
+
+-------------------------------------------------
+
+
+
+
 이미지 속 106번 문제의 정답이 ② (2건)인 이유와 사용된 MERGE 문법에 대한 상세한 설명입니다.
 
 ───
