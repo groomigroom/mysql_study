@@ -1,0 +1,42 @@
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50)
+);
+```
+
+## 2. 데이터 추가하기 (`INSERT`)
+`AUTO_INCREMENT`가 설정된 컬럼은 값을 직접 넣지 않고 `NULL`이나 `DEFAULT`를 적거나, 아예 해당 컬럼을 제외하고 입력하면 번호가 자동으로 매겨집니다.
+
+```sql
+-- 컬럼을 생략하고 입력
+INSERT INTO users (name) VALUES ('홍길동');
+
+-- NULL이나 DEFAULT 사용
+INSERT INTO users VALUES (NULL, '김철수');
+INSERT INTO users VALUES (DEFAULT, '영희');
+```
+
+## 3. 시작 값 변경하기
+시작 번호를 1이 아닌 다른 번호(예: 100)로 바꾸고 싶을 때 사용합니다.
+
+```sql
+-- 테이블 생성 시 지정
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50)
+) AUTO_INCREMENT = 100;
+
+-- 이미 만들어진 테이블 수정
+ALTER TABLE users AUTO_INCREMENT = 100;
+```
+
+## 4. 값 초기화하기
+모든 데이터를 지우고 번호를 1부터 다시 시작하고 싶다면 `TRUNCATE`를 사용합니다.
+
+```sql
+TRUNCATE TABLE users;
+```
+
+<FollowUp>
+혹시 **현재 번호를 확인하는 법**이나 **특정 값으로 강제 수정하는 법**에 대해서도 알고 싶으신가요?
+</FollowUp>
