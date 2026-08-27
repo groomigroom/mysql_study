@@ -1,14 +1,32 @@
--- 부모 테이블 (예: 사용자 테이블)
-CREATE TABLE users (
+MySQL에서 참조하는 부모 데이터가 삭제될 때 자식 데이터도 자동으로 삭제되게 하려면 외래키(Foreign Key) 설정 뒤에 ON DELETE CASCADE를 추가하면 됩니다.
+테이블을 새로 만들 때 설정하는 방법과 이미 만든 테이블에 추가하는 방법 두 가지가 있습니다.
+## 1. 테이블을 새로 만들 때 설정하는 방법
+자식 테이블(주로 외래키가 포함된 테이블)을 생성할 때 제약 조건 뒤에 ON DELETE CASCADE를 붙여줍니다.
+
+-- 부모 테이블 (예: 사용자 테이블)CREATE TABLE users (
     userid VARCHAR(50) PRIMARY KEY,
     username VARCHAR(50) NOT NULL
 );
-
--- 자식 테이블 (예: 사용자의 게시글 테이블)
-CREATE TABLE posts (
+-- 자식 테이블 (예: 사용자의 게시글 테이블)CREATE TABLE posts (
     post_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100),
     userid VARCHAR(50),
     -- 외래키 설정 및 ON DELETE CASCADE 추가
     FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE
 );
+
+## 2. 이미 존재하는 테이블에 추가하는 방법
+이미 테이블이 만들어져 있는 상태라면, 기존 외래키를 먼저 삭제한 후 ON DELETE CASCADE가 포함된 외래키를 다시 추가해야 합니다. 외래키의 이름(제약조건 이름)을 알아야 수정할 수 있습니다.
+단계 1: 기존 외래키 제약조건 이름 확인하기
+
+SHOW CREATE TABLE posts;
+
+결과 창에서 CONSTRAINT \외래키이름` FOREIGN KEY ...` 형태를 찾아 외래키 이름을 확인합니다.
+단계 2: 기존 외래키 삭제 후 새로 추가하기
+
+-- 1. 기존 외래키 제거ALTER TABLE posts DROP FOREIGN KEY FK_유저아이디; -- 확인한 외래키 이름을 적어줍니다.
+-- 2. ON DELETE CASCADE를 포함하여 외래키 재설정ALTER TABLE posts ADD CONSTRAINT FK_유저아이디 FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE;
+
+------------------------------
+혹시 외래키를 적용하려는 자식 테이블의 이름과 컬럼명을 알려주시면, 상황에 딱 맞는 정확한 SQL 쿼리문을 작성해 드릴 수 있습니다. 어떻게 도와드릴까요?
+
