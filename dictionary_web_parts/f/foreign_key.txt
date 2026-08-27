@@ -1,0 +1,14 @@
+-- 부모 테이블 (예: 사용자 테이블)
+CREATE TABLE users (
+    userid VARCHAR(50) PRIMARY KEY,
+    username VARCHAR(50) NOT NULL
+);
+
+-- 자식 테이블 (예: 사용자의 게시글 테이블)
+CREATE TABLE posts (
+    post_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100),
+    userid VARCHAR(50),
+    -- 외래키 설정 및 ON DELETE CASCADE 추가
+    FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE
+);
