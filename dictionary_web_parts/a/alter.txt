@@ -1,0 +1,15 @@
+MySQL에서 기존 테이블의 컬럼을 NOT NULL로 변경하려면 ALTER TABLE 문과 MODIFY 키word를 사용하시면 됩니다.
+
+-- username 컬럼을 NOT NULL로 변경ALTER TABLE users MODIFY username VARCHAR(50) NOT NULL;
+-- password 컬럼을 NOT NULL로 변경ALTER TABLE users MODIFY password VARCHAR(50) NOT NULL;
+
+하나의 쿼리로 동시에 변경하고 싶다면 다음과 같이 작성할 수 있습니다.
+
+ALTER TABLE users 
+    MODIFY username VARCHAR(50) NOT NULL,
+    MODIFY password VARCHAR(50) NOT NULL;
+
+⚠️ 주의사항
+만약 기존 users 테이블에 이미 NULL 값이 들어있는 데이터가 있다면 오류가 발생합니다. 이 경우 NULL인 데이터들을 먼저 다른 값으로 수정(UPDATE)한 뒤에 위 명령어를 실행해야 합니다.
+추가적인 제약조건(예: 기본값 설정 등)이나 다른 테이블 구조 변경에 대해 더 궁금한 점이 있으시면 말씀해 주세요!
+
