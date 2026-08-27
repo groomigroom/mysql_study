@@ -1,0 +1,10 @@
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    -- 값을 넣지 않으면 기본적으로 18이 들어감
+    age INT DEFAULT 18, 
+    -- 값을 넣지 않으면 기본적으로 'USER'가 들어감
+    role VARCHAR(20) DEFAULT 'USER',
+    -- 가입일 시각을 자동으로 기록 (가장 많이 쓰는 패턴)
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP 
+);
