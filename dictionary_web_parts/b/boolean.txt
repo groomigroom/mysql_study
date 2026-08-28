@@ -1,0 +1,12 @@
+create table correct_uu (
+	id varchar(50),
+    active boolean
+);
+
+insert into correct_uu
+values
+('김구름', true),
+('구룸이', false);
+
+select *
+from correct_uu;
