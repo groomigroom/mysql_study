@@ -1,0 +1,38 @@
+오라클(Oracle) 데이터베이스에서 CHAR와 VARCHAR2는 문자열 데이터를 저장하기 위해 가장 흔하게 사용하는 두 가지 핵심 데이터 타입입니다. 두 타입의 가장 결정적인 차이는 "저장 공간을 고정적으로 쓰느냐, 데이터 크기에 맞게 가변적으로 쓰느냐"에 있습니다. [1, 2, 3] 
+두 데이터 타입의 핵심 의미와 차이점을 한눈에 확인해 보세요.
+## 📊 CHAR와 VARCHAR2 핵심 비교
+
+| 항목 | CHAR(size) | VARCHAR2(size) |
+|---|---|---|
+| 의미 및 특징 | 고정 길이 문자형 타입 | 가변 길이 문자형 타입 |
+| 공간 활용 | 입력 데이터가 지정된 크기보다 작으면 남은 공간을 공백(Space)으로 채움 | 데이터 크기만큼만 공간을 차지하여 메모리를 효율적으로 아낌 |
+| 최대 크기 | 2,000 Byte | 4,000 Byte (설정에 따라 최대 32,767 Byte) |
+| 주요 용도 | 주민등록번호, 코드값, Y/N 상태값 등 길이가 일정한 데이터 | 이름, 주소, 게시글 제목 등 길이가 자주 변하는 데이터 |
+
+------------------------------
+## 💡 이해를 돕는 구체적 예시
+만약 크기를 10바이트로 지정하고 알파벳 3글자('abc')를 입력했을 때, 두 타입은 디스크에 각각 다르게 저장됩니다.
+
+* 
+* CHAR(10): 'abc'를 저장하면 나머지 7바이트를 공백으로 채워 무조건 10바이트를 차지합니다 ('abc ').
+* VARCHAR2(10): 'abc'를 저장하면 딱 필요한 3바이트만 사용하고 남은 7바이트는 시스템에 반환합니다. [2, 4, 5] 
+* 
+
+------------------------------
+## ⚠️ 실무 사용 시 주의사항
+
+   1. 공백 비교 문제 (Blank-Padding Semantics)
+   CHAR 타입은 남는 공간을 공백으로 채우기 때문에, CHAR(10)에 저장된 'abc'와 VARCHAR2(10)에 저장된 'abc'를 = 조건으로 직접 비교하면 서로 다른 데이터로 인식하여 조회되지 않을 수 있습니다. [3, 6] 
+   2. VARCHAR와 VARCHAR2의 차이
+   오라클에는 VARCHAR 타입도 존재하지만, 향후 표준 변경에 대비해 오라클 측에서는 가변 길이 문자열에 VARCHAR2를 사용하도록 강력히 권장하고 있습니다. [4] 
+
+따라서 실무에서는 데이터의 길이가 완벽하게 고정된 경우가 아니라면, 데이터베이스 공간을 절약하고 문자열 비교 오류를 방지하기 위해 대부분 VARCHAR2를 기본으로 사용합니다. [1, 6] 
+------------------------------
+현재 설계 중이거나 수정하려는 테이블의 특정 컬럼 데이터 형태를 알려주시면, CHAR와 VARCHAR2 중 어떤 타입을 적용하는 것이 성능과 공간 효율 면에서 더 유리한지 구체적으로 추천해 드릴 수 있습니다. 어떤 데이터를 저장할 예정이신가요?
+
+[1] [https://junlab.tistory.com](https://junlab.tistory.com/93)
+[2] [https://www.youtube.com](https://www.youtube.com/watch?v=J4WQl7Numo8&t=6)
+[3] [https://innu.pe.kr](https://innu.pe.kr/view/Oracle-char-varchar2)
+[4] [https://infjin.tistory.com](https://infjin.tistory.com/130)
+[5] [https://www.soulfree.net](https://www.soulfree.net/m/532)
+[6] [https://blog.cslee.co.kr](https://blog.cslee.co.kr/differences-between-char-and-varchar2-in-terms-of-comparative-semantics/)
