@@ -1,1 +1,12 @@
-d
+ALTER TABLE 테이블명 RENAME COLUMN 기존_컬럼명 TO 새_컬럼명;
+```
+
+### 2. CHANGE 방식 (과거 버전 호환 및 타입 변경 겸용)
+MySQL 구버전을 사용하거나 컬럼 이름 변경과 동시에 데이터 타입까지 수정해야 할 때 사용합니다.
+```sql
+ALTER TABLE 테이블명 CHANGE 기존_컬럼명 새_컬럼명 데이터_타입;
+```
+
+<FollowUp>
+만약 사용 중인 **MySQL 버전**이나 **동시에 수정해야 하는 속성(NOT NULL, DEFAULT 등)**이 있다면 말씀해 주세요. 정확한 쿼리를 다시 짜드리겠습니다.
+</FollowUp>
